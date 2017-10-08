@@ -1,0 +1,45 @@
+[
+  {
+    "type": "singleChoice",
+    "index": 0,
+    "title": "What is your gender?",
+    "hasText": false,
+    "options": [
+      "Male",
+      "Female",
+      "I prefer not to answer"
+    ]
+  },
+  {
+    "type": "singleChoice",
+    "index": 1,
+    "title": "How often do you drink?",
+    "hasText": false,
+    "options": [
+      "Less than 3 times per month",
+      "More than once per week",
+      "Everyday",
+      "Never"
+    ]
+  },
+  {
+    "type": "multipleChoice",
+    "index": 2,
+    "title": "Do you have or have you ever had any of the following? Please check.",
+    "hasText": false,
+    "options": [
+      "Diabetes",
+      "kidney disease",
+      "Thyroid disease",
+      "Heart attack",
+      "I don't have any of the above"
+    ]
+  },
+  {
+    "type": "text_input",
+    "index": 3,
+    "title": "What is your height?",
+    "hasText": true,
+    "options": []
+  }
+]
