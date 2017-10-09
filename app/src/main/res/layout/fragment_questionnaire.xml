@@ -5,83 +5,33 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/ll_question_all"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/ll_single_choice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bc1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_question_title"
-                style="@style/risk_theme_title"
-                android:paddingLeft="@dimen/XL"
-                android:text="请选择接种取消原因："/>
+                style="@style/question_theme_title"
+                android:text="title："/>
 
             <RadioGroup
+                android:id="@+id/rg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rg"
                 android:paddingLeft="@dimen/XL"
                 android:paddingTop="@dimen/XL">
 
-                <RadioButton
-                    android:id="@+id/rb1"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:checked="false"
-                    android:drawablePadding="@dimen/L"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/L"
-                    android:text="取消原因1"
-                    android:textColor="@color/tc1"
-                    android:textSize="@dimen/text_size_16"/>
-
-                <RadioButton
-                    android:id="@+id/rb2"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:checked="false"
-                    android:drawablePadding="@dimen/L"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/L"
-                    android:text="取消原因2"
-                    android:textColor="@color/tc1"
-                    android:textSize="@dimen/text_size_16"/>
-
-                <RadioButton
-                    android:id="@+id/rb3"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:checked="false"
-                    android:drawablePadding="@dimen/L"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/L"
-                    android:text="取消原因3"
-                    android:textColor="@color/tc1"
-                    android:textSize="@dimen/text_size_16"/>
-
-                <RadioButton
-                    android:id="@+id/rb4"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:checked="false"
-                    android:drawablePadding="@dimen/L"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/L"
-                    android:text="其他，请填写"
-                    android:textColor="@color/tc1"
-                    android:textSize="@dimen/text_size_16"/>
             </RadioGroup>
 
             <LinearLayout
-                android:id="@+id/ll_cancel_reason"
+                android:id="@+id/ll_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/XL"
@@ -93,12 +43,12 @@
 
                 <EditText
 
-                    android:id="@+id/et_cancel_reason"
+                    android:id="@+id/et_answer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:gravity="top|left"
-                    android:hint="请输入原因"
+                    android:gravity="top|start"
+                    android:hint="Please type here"
                     android:lines="4"
                     android:maxLength="20"
                     android:paddingLeft="@dimen/XL"
@@ -108,24 +58,19 @@
                     android:textColorHint="@color/tc3"
                     android:textSize="@dimen/text_size_14"/>
 
-                <TextView
-                    android:id="@+id/tv_text_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:paddingBottom="@dimen/L"
-                    android:paddingRight="@dimen/L"
-                    android:text="0/20"
-                    android:textColor="@color/tc3"
-                    android:textSize="@dimen/text_size_14"/>
+                <!--<TextView-->
+                <!--android:id="@+id/tv_text_num"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="end"-->
+                <!--android:paddingBottom="@dimen/L"-->
+                <!--android:paddingRight="@dimen/L"-->
+                <!--android:text="0/20"-->
+                <!--android:textColor="@color/tc3"-->
+                <!--android:textSize="@dimen/text_size_14"/>-->
             </LinearLayout>
 
         </LinearLayout>
-
-        <!--<include layout="@layout/multichoice_layout"/>-->
-
-        <!--<include layout="@layout/date_layout"/>-->
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

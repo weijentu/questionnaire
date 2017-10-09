@@ -8,17 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!--Risk Evaluation start-->
-    <style name="risk_theme_title">
+    <style name="question_theme_title">
         <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:textColor">@color/tc1</item>
-
+        <item name="android:paddingStart">@dimen/XL</item>
+        <item name="android:paddingEnd">@dimen/XL</item>
         <item name="android:paddingRight">@dimen/XL</item>
-        <item name="android:paddingTop">@dimen/XXXXXL</item>
+        <item name="android:layout_marginTop">@dimen/XXXXL</item>
+        <item name="android:paddingTop">@dimen/L</item>
         <item name="android:paddingBottom">@dimen/L</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/bc1</item>
     </style>
 
 

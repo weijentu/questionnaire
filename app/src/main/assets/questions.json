@@ -1,45 +1,104 @@
 [
   {
-    "type": "singleChoice",
+    "type": "text_input",
     "index": 0,
-    "title": "What is your gender?",
+    "textIndex": 0,
+    "title": "What is your name?",
+    "hasText": true,
+    "options": []
+  },
+  {
+    "type": "single_choice",
+    "index": 1,
+    "textIndex": 0,
+    "title": "Please select your gender?",
     "hasText": false,
     "options": [
       "Male",
-      "Female",
-      "I prefer not to answer"
+      "Female"
     ]
   },
   {
-    "type": "singleChoice",
-    "index": 1,
-    "title": "How often do you drink?",
-    "hasText": false,
-    "options": [
-      "Less than 3 times per month",
-      "More than once per week",
-      "Everyday",
-      "Never"
-    ]
-  },
-  {
-    "type": "multipleChoice",
+    "type": "date_picker",
     "index": 2,
-    "title": "Do you have or have you ever had any of the following? Please check.",
+    "textIndex": 0,
+    "title": "Please select  your date of birth?",
+    "hasText": false,
+    "options": []
+  },
+  {
+    "type": "single_choice",
+    "index": 3,
+    "textIndex": 0,
+    "title": "What is your weight? (Pounds (lbs))",
     "hasText": false,
     "options": [
-      "Diabetes",
-      "kidney disease",
-      "Thyroid disease",
-      "Heart attack",
-      "I don't have any of the above"
+      "Under 100",
+      "100-125",
+      "126-150",
+      "151-175",
+      "176-200",
+      "201-225",
+      "Over 226"
     ]
   },
   {
-    "type": "text_input",
-    "index": 3,
-    "title": "What is your height?",
+    "type": "single_choice",
+    "index": 4,
+    "textIndex": 0,
+    "title": "In general, how would you rate your health? ",
+    "hasText": false,
+    "options": [
+      "Excellent" ,
+      "Very good",
+      "Good",
+      "Fair",
+      "Poor"
+    ]
+  },
+  {
+    "type": "single_choice",
+    "index": 5,
+    "textIndex": 0,
+    "title": "Do you smoke?",
     "hasText": true,
-    "options": []
+    "options": [
+      "Yes (If yes, document amount)" ,
+      "No"
+    ]
+  },
+  {
+    "type": "single_choice",
+    "index": 6,
+    "textIndex": 0,
+    "title": "Do you drink alcohol?",
+    "hasText": true,
+    "options": [
+      "Yes (If yes, document amount)" ,
+      "No"
+    ]
+  },
+  {
+    "type": "multiple_choice",
+    "index": 7,
+    "textIndex": 12,
+    "title": "What medical conditions do you have or have you had in the past? (Please indicate all that apply.)",
+    "hasText": true,
+    "options": [
+      "Anxiety",
+      "Asthma",
+      "Bi-polar disorder",
+      "Cancer",
+      "COPD/emphysema",
+      "Coronary heart disease",
+      "Dementia",
+      "Depression",
+      "Diabetes",
+      "Hearing problems",
+      "Heart failure",
+      "Hypertension",
+      "Other"
+    ]
   }
+
 ]

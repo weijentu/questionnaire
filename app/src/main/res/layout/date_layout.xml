@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/tv_question_title"
         android:paddingLeft="@dimen/XL"
-        style="@style/risk_theme_title"
+        style="@style/question_theme_title"
         android:text="请选择出生日期："/>
 
 

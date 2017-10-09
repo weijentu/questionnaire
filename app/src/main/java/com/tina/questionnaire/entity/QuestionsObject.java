@@ -11,9 +11,9 @@ import java.util.List;
 
 public class QuestionsObject implements Serializable{
 
-    public static final String SINGLE_CHOICE = "singleChoice";
-    public static final String MULTI_CHOICE = "multipleChoice";
-    public static final String DATE_PICKER = "datePicker";
+    public static final String SINGLE_CHOICE = "single_choice";
+    public static final String MULTI_CHOICE = "multiple_choice";
+    public static final String DATE_PICKER = "date_picker";
     public static final String TEXT_INPUT = "text_input";
     /**
      * type : SingleChoice
@@ -23,16 +23,13 @@ public class QuestionsObject implements Serializable{
      * options : ["Male","Famle","I prefer not to answer"]
      */
 
-    public String type;      //那种类型的问题 :SingleChoice; MultipleChoice; DatePicker
-    public int index;        //第几个问题
-    public String title;     //题目
-    public boolean hasText;  //是否有文字栏位
-    public List<String> options; //问题的选项
+    public String type;      //question type : SingleChoice; MultipleChoice; DatePicker
+    public int index;        //question index
+    public int textIndex;    //if the option of the textIndex is selected, show editbox
+    public String title;     //question
+    public boolean hasText;  //if contains text input
+    public List<String> options; //selections
 
-    public String answer;//
+    public String answer;   // answer from customer
 
-    @Override
-    public String toString() {
-        return type + index + title + hasText + options.get(0);
-    }
 }
