@@ -35,7 +35,7 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
     public static final String QUESTION_OBJECT = "question_object";
     public static final String QUESTION_SIZE = "question_size";
     private QuestionViewPager mViewPager;
-    private TextView mButton;
+    private TextView mCancelButton;
     private List<QuestionsObject> resultList = new ArrayList<>();
 
 
@@ -48,7 +48,10 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
     }
 
     public void initViews() {
-        mButton = (TextView) findViewById(R.id.btn_cancel);
+        mCancelButton = (TextView) findViewById(R.id.btn_cancel);
+        /**
+         * generate fragment for each question
+         */
         for (int i = 0; i < mList.size(); i++) {
             mFragments.add(new CommonFragment());
             Bundle bundle = new Bundle();
@@ -56,10 +59,13 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
             bundle.putInt(QUESTION_SIZE, mList.size());
             mFragments.get(i).setArguments(bundle);
         }
-        mButton.setOnClickListener(new View.OnClickListener() {
+        /**
+         * set cancel button on each question page
+         */
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(QuestionnaireNewActivity.this, MainActivity.class));
+                startActivity(new Intent(QuestionnaireNewActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
         QuesFragAdapter adapter = new QuesFragAdapter(getSupportFragmentManager(), mFragments);
@@ -83,6 +89,11 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
         });
     }
 
+    /**
+     * read from local json file under assets folder
+     * @param fileName
+     */
+
     public void getList(String fileName) {
         StringBuilder stringBuilder = new StringBuilder();
         AssetManager assetManager = this.getAssets();
@@ -104,6 +115,12 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
         }
     }
 
+    /**
+     * save answer for each questions to a list when the next button is clicked, and then move to the next question,
+     * and save the answer list to SharedPreference in Json form when the submit button in the last question is clicked
+     *
+     * @param object
+     */
 
     @Override
     public void onNext(QuestionsObject object) {
@@ -116,12 +133,17 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
                 edit.putString(QUESTIONNAIRE_KEY, JSON.toJSONString(resultList));
                 edit.apply();
             }
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP));
         } else {
             mViewPager.setCurrentItem(object.index + 1);
         }
 
     }
+
+    /**
+     * move to the previous question
+     * @param object
+     */
 
     @Override
     public void onPrev(QuestionsObject object) {

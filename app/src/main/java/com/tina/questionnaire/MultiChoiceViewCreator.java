@@ -22,7 +22,7 @@ import java.util.List;
  * description:
  */
 
-public class MultiChoiceHelper implements QuestionHelper {
+public class MultiChoiceViewCreator implements QuestionViewCreator {
 
     private QuestionsObject mQuestionsObject;
 
@@ -50,6 +50,9 @@ public class MultiChoiceHelper implements QuestionHelper {
     private void initData(){
         mTvTtitle.setText(mQuestionsObject.title);
         mCheckBoxList = new ArrayList<>();
+        /**
+         * dynamically generate checkbox according to the number of options
+         */
         for (int i = 0; i < mQuestionsObject.options.size(); i++){
             String item = mQuestionsObject.options.get(i);
             CheckBox cb = new CheckBox(mContext);
@@ -59,7 +62,12 @@ public class MultiChoiceHelper implements QuestionHelper {
             mLlCheckBox.addView(cb);
             mCheckBoxList.add(cb);
         }
-        mCheckBoxList.get(mQuestionsObject.textIndex).setOnCheckedChangeListener(mOnCheckedChangeListener);
+        /**
+         * if input text is needed, listen to the selected options to dynamically generate EditText
+         */
+        if(mQuestionsObject.hasText) {
+            mCheckBoxList.get(mQuestionsObject.textIndex).setOnCheckedChangeListener(mOnCheckedChangeListener);
+        }
 
     }
     private CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
@@ -91,6 +99,9 @@ public class MultiChoiceHelper implements QuestionHelper {
         if(mQuestionsObject.hasText && mCheckBoxList.get(mQuestionsObject.textIndex).isChecked()){
             sb.append(mEditText.getText().toString());
         }
+        /**
+         * save input answer
+         */
         mQuestionsObject.answer = sb.toString();
         return true;
     }

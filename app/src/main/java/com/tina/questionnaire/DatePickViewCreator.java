@@ -17,7 +17,7 @@ import java.util.Calendar;
  * description:
  */
 
-public class DatePickHelper implements QuestionHelper {
+public class DatePickViewCreator implements QuestionViewCreator {
 
     private QuestionsObject mObject;
     private TextView mTextView;
@@ -60,6 +60,9 @@ public class DatePickHelper implements QuestionHelper {
         calendar.add(Calendar.MONTH, 1);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+        /**
+         * make sure the birth date is not in the future
+         */
         if(mDatePicker.getYear() > year || (mDatePicker.getYear() == year && mDatePicker.getMonth() > month)
                 || (mDatePicker.getYear() == year && mDatePicker.getMonth() == month && mDatePicker.getDayOfMonth() > day)){
             Toast.makeText(mContext, "Selected date must be less than today",Toast.LENGTH_SHORT).show();
@@ -71,6 +74,9 @@ public class DatePickHelper implements QuestionHelper {
         time.append(mDatePicker.getMonth());
         time.append("-");
         time.append(mDatePicker.getDayOfMonth());
+        /**
+         * save birth date to answer
+         */
         mObject.answer = time.toString();
         return true;
     }

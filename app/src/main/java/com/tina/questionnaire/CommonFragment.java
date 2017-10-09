@@ -17,7 +17,7 @@ import com.tina.questionnaire.entity.QuestionsObject;
 /**
  * Created by Tina
  * on 2017/10/8
- * description:
+ * description: Generate fragments according to different question type
  */
 
 public class CommonFragment extends Fragment {
@@ -26,7 +26,7 @@ public class CommonFragment extends Fragment {
     protected Context mActivity;
     private QuestionsObject mObject;
     private int questionsNum;
-    private QuestionHelper mQuestionHelper;
+    private QuestionViewCreator mQuestionViewCreator;
     private ViewGroup mContent;
     private Button mBtnPrev;
     private OnPageChangeListener mListener;
@@ -38,14 +38,17 @@ public class CommonFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mObject = (QuestionsObject) getArguments().getSerializable(QuestionnaireNewActivity.QUESTION_OBJECT);
         questionsNum = getArguments().getInt(QuestionnaireNewActivity.QUESTION_SIZE);
+        /**
+         * generate different type of viewCreators according to question type
+         */
         if (mObject.type.equals(QuestionsObject.SINGLE_CHOICE)) {
-            mQuestionHelper = new SingleChoiceHelper();
+            mQuestionViewCreator = new SingleChoiceViewCreator();
         } else if (mObject.type.equals(QuestionsObject.MULTI_CHOICE)) {
-            mQuestionHelper = new MultiChoiceHelper();
+            mQuestionViewCreator = new MultiChoiceViewCreator();
         } else if (mObject.type.equals(QuestionsObject.TEXT_INPUT)) {
-            mQuestionHelper = new TextInputHelper();
+            mQuestionViewCreator = new TextInputViewCreator();
         } else if(mObject.type.equals(QuestionsObject.DATE_PICKER)){
-            mQuestionHelper = new DatePickHelper();
+            mQuestionViewCreator = new DatePickViewCreator();
         } else{
             Toast.makeText(mActivity,"Json file contains error!",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(mActivity, MainActivity.class));
@@ -60,7 +63,13 @@ public class CommonFragment extends Fragment {
         if (mActivity instanceof QuestionnaireNewActivity) {
             mListener = (OnPageChangeListener) mActivity;
         }
-        mContent.addView(mQuestionHelper.getView(mActivity, mObject));
+        /**
+         * obtain view created in the QuestionViewCreator and add to the current ViewGroup
+         */
+        mContent.addView(mQuestionViewCreator.getView(mActivity, mObject));
+        /**
+         * add prev question button and next question button
+         */
         mBtnPrev = (Button) findViewById(R.id.btn_prev);
         mBtnNext = (Button)findViewById(R.id.btn_next);
         mBtnPrev.setVisibility(mObject.index == 0 ? View.GONE :View.VISIBLE);
@@ -68,13 +77,19 @@ public class CommonFragment extends Fragment {
         mBtnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 *  callback onPrev() method in questionnaire activity
+                 */
                 mListener.onPrev(mObject);
             }
         });
         mBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mQuestionHelper.check()) {
+                if (mQuestionViewCreator.check()) {
+                    /**
+                     *  if question is correctly answered, callback onPrev() method in questionnaire activity
+                     */
                     mListener.onNext(mObject);
                 }
             }

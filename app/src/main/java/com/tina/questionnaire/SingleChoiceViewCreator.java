@@ -24,7 +24,7 @@ import java.util.List;
  * description:
  */
 
-public class SingleChoiceHelper implements QuestionHelper {
+public class SingleChoiceViewCreator implements QuestionViewCreator {
 
     private TextView mTvTtitle;
     private EditText mEditText;
@@ -53,6 +53,9 @@ public class SingleChoiceHelper implements QuestionHelper {
     public void initData() {
         mTvTtitle.setText(mQuestionsObject.title);
         mList = new ArrayList<>();
+        /**
+         * Dynamically generate radio buttons according to the number of options
+         */
         for (int i = 0; i < mQuestionsObject.options.size(); i++) {
             String item = mQuestionsObject.options.get(i);
             RadioButton radioButton = new RadioButton(mContext);
@@ -88,6 +91,9 @@ public class SingleChoiceHelper implements QuestionHelper {
             Toast.makeText(mContext, "Please enter your answer", Toast.LENGTH_SHORT).show();
             return false;
         }
+        /**
+         *  save answer
+         */
         if (mQuestionsObject.hasText && selectedId == mQuestionsObject.textIndex){
             mQuestionsObject.answer = mEditText.getText().toString();
         }else {

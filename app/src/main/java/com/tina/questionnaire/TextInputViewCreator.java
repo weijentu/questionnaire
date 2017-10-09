@@ -16,7 +16,7 @@ import com.tina.questionnaire.entity.QuestionsObject;
  * description:
  */
 
-public class TextInputHelper implements QuestionHelper {
+public class TextInputViewCreator implements QuestionViewCreator {
 
     private QuestionsObject mObject;
     private TextView mTvTtitle;
