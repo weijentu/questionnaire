@@ -1,5 +1,6 @@
 package com.tina.questionnaire;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -32,6 +34,7 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
     List<Fragment> mFragments = new ArrayList<>();
     public static final String QUESTION_OBJECT = "question_object";
     public static final String QUESTION_SIZE = "question_size";
+    public static final String QUESTION_INDEX = "question_index";
     private QuestionViewPager mViewPager;
     private TextView mCancelButton;
     private List<QuestionsObject> resultList = new ArrayList<>();
@@ -55,6 +58,7 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
             Bundle bundle = new Bundle();
             bundle.putSerializable(QUESTION_OBJECT, mList.get(i));
             bundle.putInt(QUESTION_SIZE, mList.size());
+            bundle.putInt(QUESTION_INDEX,i);
             mFragments.get(i).setArguments(bundle);
         }
         /**
@@ -78,7 +82,12 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
 
             @Override
             public void onPageSelected(int position) {
-
+                InputMethodManager imm = (InputMethodManager) QuestionnaireNewActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm.isActive()) {
+                    if (QuestionnaireNewActivity.this.getCurrentFocus() != null) {
+                        imm.hideSoftInputFromWindow(QuestionnaireNewActivity.this.getCurrentFocus().getWindowToken(), 0);
+                    }
+                }
             }
 
             @Override
@@ -112,10 +121,10 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
      */
 
     @Override
-    public void onNext(QuestionsObject object) {
+    public void onNext(int index, QuestionsObject object) {
 
-        resultList.add(object.index, object);
-        if (object.index == (mList.size() - 1)) {
+        resultList.add(index, object);
+        if (index == mList.size() - 1) {
             if (resultList != null) {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor edit = sharedPreferences.edit();
@@ -124,7 +133,7 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
             }
             startActivity(new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP));
         } else {
-            mViewPager.setCurrentItem(object.index + 1);
+            mViewPager.setCurrentItem(index + 1);
         }
 
     }
@@ -135,7 +144,7 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
      */
 
     @Override
-    public void onPrev(QuestionsObject object) {
-        mViewPager.setCurrentItem(object.index - 1);
+    public void onPrev(int index, QuestionsObject object) {
+        mViewPager.setCurrentItem(index - 1);
     }
 }

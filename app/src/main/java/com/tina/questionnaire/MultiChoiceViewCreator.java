@@ -22,7 +22,7 @@ import java.util.List;
  * description:
  */
 
-public class MultiChoiceViewCreator implements QuestionViewCreator {
+public class MultiChoiceViewCreator extends CommonTextInputViewCreator implements QuestionViewCreator {
 
     private QuestionsObject mQuestionsObject;
 
@@ -31,7 +31,6 @@ public class MultiChoiceViewCreator implements QuestionViewCreator {
     private LinearLayout mLlCheckBox;
 
     private List<CheckBox> mCheckBoxList;
-    private EditText mEditText;
     private LinearLayout mLlText;
 
 
@@ -42,8 +41,8 @@ public class MultiChoiceViewCreator implements QuestionViewCreator {
         View view = LayoutInflater.from(context).inflate(R.layout.multichoice_layout,null, false);
         mTvTtitle = (TextView)view.findViewById(R.id.tv_question_title);
         mLlCheckBox = (LinearLayout) view.findViewById(R.id.ll_checkboxes);
-        mLlText = (LinearLayout)view.findViewById(R.id.ll_answer);
-        mEditText = (EditText)view.findViewById(R.id.et_answer);
+        mLlText = (LinearLayout)view.findViewById(R.id.ll_textinput);
+        getTextInputView(context,mLlText,object);
         initData();
         return view;
     }
@@ -92,13 +91,15 @@ public class MultiChoiceViewCreator implements QuestionViewCreator {
         if(TextUtils.isEmpty(sb.toString())){
             Toast.makeText(mContext,"Please select at least one option", Toast.LENGTH_SHORT).show();
             return false;
-        }else if(mQuestionsObject.hasText && mCheckBoxList.get(mQuestionsObject.textIndex).isChecked() && TextUtils.isEmpty(mEditText.getText().toString())) {
-            Toast.makeText(mContext, "Please enter your answer", Toast.LENGTH_SHORT).show();
-            return false;
         }
         if(mQuestionsObject.hasText && mCheckBoxList.get(mQuestionsObject.textIndex).isChecked()){
-            sb.append(mEditText.getText().toString());
+            boolean value = super.check();
+            if(!value){
+                return false;
+            }
+            sb.append(mQuestionsObject.answer);
         }
+
         /**
          * save input answer
          */

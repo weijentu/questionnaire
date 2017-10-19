@@ -31,6 +31,7 @@ public class CommonFragment extends Fragment {
     private Button mBtnPrev;
     private OnPageChangeListener mListener;
     private Button mBtnNext;
+    private int index;
 
 
     @Override
@@ -38,20 +39,18 @@ public class CommonFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mObject = (QuestionsObject) getArguments().getSerializable(QuestionnaireNewActivity.QUESTION_OBJECT);
         questionsNum = getArguments().getInt(QuestionnaireNewActivity.QUESTION_SIZE);
+        index = getArguments().getInt(QuestionnaireNewActivity.QUESTION_INDEX);
         /**
          * generate different type of viewCreators according to question type
          */
-        if (mObject.type.equals(QuestionsObject.SINGLE_CHOICE)) {
+        if (mObject.type.equals(QuestionsObject.Type.SINGLE_CHOICE)) {
             mQuestionViewCreator = new SingleChoiceViewCreator();
-        } else if (mObject.type.equals(QuestionsObject.MULTI_CHOICE)) {
+        } else if (mObject.type.equals(QuestionsObject.Type.MULTI_CHOICE)) {
             mQuestionViewCreator = new MultiChoiceViewCreator();
-        } else if (mObject.type.equals(QuestionsObject.TEXT_INPUT)) {
+        } else if (mObject.type.equals(QuestionsObject.Type.TEXT_INPUT)) {
             mQuestionViewCreator = new TextInputViewCreator();
-        } else if(mObject.type.equals(QuestionsObject.DATE_PICKER)){
+        } else if(mObject.type.equals(QuestionsObject.Type.DATE_PICKER)){
             mQuestionViewCreator = new DatePickViewCreator();
-        } else{
-            Toast.makeText(mActivity,"Json file contains error!",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(mActivity, MainActivity.class));
         }
     }
 
@@ -72,15 +71,15 @@ public class CommonFragment extends Fragment {
          */
         mBtnPrev = (Button) findViewById(R.id.btn_prev);
         mBtnNext = (Button)findViewById(R.id.btn_next);
-        mBtnPrev.setVisibility(mObject.index == 0 ? View.GONE :View.VISIBLE);
-        mBtnNext.setText(mObject.index == (questionsNum - 1) ? "SUMBMIT" : "NEXT");
+        mBtnPrev.setVisibility(index == 0 ? View.GONE :View.VISIBLE);
+        mBtnNext.setText(index == (questionsNum - 1) ? "SUMBMIT" : "NEXT");
         mBtnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /**
                  *  callback onPrev() method in questionnaire activity
                  */
-                mListener.onPrev(mObject);
+                mListener.onPrev(index, mObject);
             }
         });
         mBtnNext.setOnClickListener(new View.OnClickListener() {
@@ -88,9 +87,9 @@ public class CommonFragment extends Fragment {
             public void onClick(View v) {
                 if (mQuestionViewCreator.check()) {
                     /**
-                     *  if question is correctly answered, callback onPrev() method in questionnaire activity
+                     *  if question is correctly answered callback onPrev() method in questionnaire activity
                      */
-                    mListener.onNext(mObject);
+                    mListener.onNext(index, mObject);
                 }
             }
         });

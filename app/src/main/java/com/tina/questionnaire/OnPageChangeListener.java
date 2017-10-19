@@ -12,8 +12,8 @@ import com.tina.questionnaire.entity.QuestionsObject;
 public interface OnPageChangeListener {
 
 
-    void onNext(QuestionsObject object);
+    void onNext(int index, QuestionsObject object);
 
-    void onPrev(QuestionsObject object);
+    void onPrev(int index, QuestionsObject object);
 
 }

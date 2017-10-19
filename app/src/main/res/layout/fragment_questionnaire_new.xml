@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ll_question_parent"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_single_choice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_question_title"
+                style="@style/question_theme_title"
+                android:text="title："/>
+
+            <RadioGroup
+                android:id="@+id/rg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/XL"
+                android:paddingTop="@dimen/XL">
+
+            </RadioGroup>
+            <LinearLayout
+                android:id="@+id/ll_textinput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical"/>
+
+            <!--<LinearLayout-->
+            <!--android:id="@+id/ll_answer"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="@dimen/XL"-->
+            <!--android:layout_marginLeft="@dimen/XL"-->
+            <!--android:layout_marginRight="@dimen/XL"-->
+            <!--android:background="@drawable/shape_edit_text"-->
+            <!--android:orientation="vertical"-->
+            <!--android:visibility="gone">-->
+
+            <!--<EditText-->
+
+            <!--android:id="@+id/et_answer"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:gravity="top|start"-->
+            <!--android:hint="Please type here"-->
+            <!--android:lines="4"-->
+            <!--android:maxLength="20"-->
+            <!--android:paddingLeft="@dimen/XL"-->
+            <!--android:paddingRight="@dimen/XL"-->
+            <!--android:paddingTop="@dimen/M"-->
+            <!--android:textColor="@color/tc1"-->
+            <!--android:textColorHint="@color/tc3"-->
+            <!--android:textSize="@dimen/text_size_14"/>-->
+            <!---->
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,6 +1,6 @@
 [
   {
-    "type": "text_input",
+    "type": "TEXT_INPUT",
     "index": 0,
     "textIndex": 0,
     "title": "What is your name?",
@@ -8,7 +8,7 @@
     "options": []
   },
   {
-    "type": "single_choice",
+    "type": "SINGLE_CHOICE",
     "index": 1,
     "textIndex": 0,
     "title": "Please select your gender?",
@@ -19,7 +19,7 @@
     ]
   },
   {
-    "type": "date_picker",
+    "type": "DATE_PICKER",
     "index": 2,
     "textIndex": 0,
     "title": "Please select  your date of birth?",
@@ -27,7 +27,7 @@
     "options": []
   },
   {
-    "type": "single_choice",
+    "type": "SINGLE_CHOICE",
     "index": 3,
     "textIndex": 0,
     "title": "What is your weight? (Pounds (lbs))",
@@ -43,7 +43,7 @@
     ]
   },
   {
-    "type": "single_choice",
+    "type": "SINGLE_CHOICE",
     "index": 4,
     "textIndex": 0,
     "title": "In general, how would you rate your health? ",
@@ -57,7 +57,7 @@
     ]
   },
   {
-    "type": "single_choice",
+    "type": "SINGLE_CHOICE",
     "index": 5,
     "textIndex": 0,
     "title": "Do you smoke?",
@@ -68,7 +68,7 @@
     ]
   },
   {
-    "type": "single_choice",
+    "type": "SINGLE_CHOICE",
     "index": 6,
     "textIndex": 0,
     "title": "Do you drink alcohol?",
@@ -79,7 +79,7 @@
     ]
   },
   {
-    "type": "multiple_choice",
+    "type": "MULTI_CHOICE",
     "index": 7,
     "textIndex": 12,
     "title": "What medical conditions do you have or have you had in the past? (Please indicate all that apply.)",

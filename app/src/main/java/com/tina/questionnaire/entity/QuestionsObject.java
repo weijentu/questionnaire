@@ -11,20 +11,11 @@ import java.util.List;
 
 public class QuestionsObject implements Serializable{
 
-    public static final String SINGLE_CHOICE = "single_choice";
-    public static final String MULTI_CHOICE = "multiple_choice";
-    public static final String DATE_PICKER = "date_picker";
-    public static final String TEXT_INPUT = "text_input";
-    /**
-     * type : SingleChoice
-     * index : 1
-     * title : What is your gender?
-     * hasText : false
-     * options : ["Male","Famle","I prefer not to answer"]
-     */
+    public enum Type{
+        SINGLE_CHOICE,MULTI_CHOICE,DATE_PICKER,TEXT_INPUT
+    }
 
-    public String type;      //question type : SingleChoice; MultipleChoice; DatePicker
-    public int index;        //question index
+    public Type type;
     public int textIndex;    //if the option of the textIndex is selected, show editbox
     public String title;     //question
     public boolean hasText;  //if contains text input

@@ -29,47 +29,53 @@
                 android:paddingLeft="@dimen/XL">
 
             </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/ll_answer"
+                android:id="@+id/ll_textinput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/XL"
-                android:layout_marginRight="@dimen/XL"
-                android:layout_marginTop="@dimen/L"
-                android:layout_marginLeft="@dimen/L"
-                android:background="@drawable/shape_edit_text"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone"/>
 
-                <EditText
-
-                    android:id="@+id/et_answer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:gravity="top|left"
-                    android:hint="请输入原因"
-                    android:lines="4"
-                    android:maxLength="20"
-                    android:paddingLeft="@dimen/XL"
-                    android:paddingRight="@dimen/XL"
-                    android:paddingTop="@dimen/M"
-                    android:textColor="@color/tc1"
-                    android:textColorHint="@color/tc3"
-                    android:textSize="@dimen/text_size_14"/>
-
-                <!--<TextView-->
-                <!--android:id="@+id/tv_text_num"-->
-                <!--android:layout_width="wrap_content"-->
+            <!--<LinearLayout-->
+                <!--android:id="@+id/ll_answer"-->
+                <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="end"-->
-                <!--android:paddingBottom="@dimen/L"-->
-                <!--android:paddingRight="@dimen/L"-->
-                <!--android:text="0/20"-->
-                <!--android:textColor="@color/tc3"-->
-                <!--android:textSize="@dimen/text_size_14"/>-->
-            </LinearLayout>
+                <!--android:layout_marginBottom="@dimen/XL"-->
+                <!--android:layout_marginRight="@dimen/XL"-->
+                <!--android:layout_marginTop="@dimen/L"-->
+                <!--android:layout_marginLeft="@dimen/L"-->
+                <!--android:background="@drawable/shape_edit_text"-->
+                <!--android:orientation="vertical"-->
+                <!--android:visibility="gone">-->
+
+                <!--<EditText-->
+
+                    <!--android:id="@+id/et_answer"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@android:color/transparent"-->
+                    <!--android:gravity="top|left"-->
+                    <!--android:hint="请输入原因"-->
+                    <!--android:lines="4"-->
+                    <!--android:maxLength="20"-->
+                    <!--android:paddingLeft="@dimen/XL"-->
+                    <!--android:paddingRight="@dimen/XL"-->
+                    <!--android:paddingTop="@dimen/M"-->
+                    <!--android:textColor="@color/tc1"-->
+                    <!--android:textColorHint="@color/tc3"-->
+                    <!--android:textSize="@dimen/text_size_14"/>-->
+
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/tv_text_num"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_gravity="end"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingBottom="@dimen/L"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingRight="@dimen/L"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="0/20"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/tc3"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="@dimen/text_size_14"/>&ndash;&gt;-->
+            <!--</LinearLayout>-->
         </LinearLayout>
     </ScrollView>
 

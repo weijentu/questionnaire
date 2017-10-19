@@ -40,7 +40,6 @@ public class DatePickViewCreator implements QuestionViewCreator {
         mTextView.setText(mObject.title);
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
-        calendar.add(Calendar.MONTH, 1);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
@@ -57,7 +56,6 @@ public class DatePickViewCreator implements QuestionViewCreator {
     public boolean check() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
-        calendar.add(Calendar.MONTH, 1);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         /**
