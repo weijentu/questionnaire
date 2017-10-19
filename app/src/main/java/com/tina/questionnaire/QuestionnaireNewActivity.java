@@ -2,22 +2,20 @@ package com.tina.questionnaire;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.tina.questionnaire.entity.QuestionsObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
-        getList("questions.json");
+        getList();
         initViews();
     }
 
@@ -91,24 +89,15 @@ public class QuestionnaireNewActivity extends AppCompatActivity implements OnPag
 
     /**
      * read from local json file under assets folder
-     * @param fileName
+     *
      */
 
-    public void getList(String fileName) {
-        StringBuilder stringBuilder = new StringBuilder();
-        AssetManager assetManager = this.getAssets();
+    public void getList() {
+        InputStream inputStream = getResources().openRawResource(R.raw.questions);
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(assetManager.open(fileName), "utf-8"));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-            bufferedReader.close();
+            mList = JSON.parseObject(inputStream, new TypeReference<ArrayList<QuestionsObject>>(){}.getType());
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        if (!TextUtils.isEmpty(stringBuilder.toString())) {
-            mList = JSON.parseArray(stringBuilder.toString(), QuestionsObject.class);
         }
         if (mList == null) {
             mList = new ArrayList<>();
