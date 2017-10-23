@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,15 +17,18 @@ import com.tina.questionnaire.entity.QuestionsObject;
 
 public abstract class CommonTextInputViewCreator {
 
-    private QuestionsObject mObject;
+    protected QuestionsObject mObject;
+    protected Context mContext;
+    protected View childView;
     private EditText mEditText;
-    private Context mContext;
 
-
-    public View getTextInputView(Context context, ViewGroup parent, QuestionsObject object) {
+    public CommonTextInputViewCreator(Context context, QuestionsObject object){
         mContext = context;
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment_common_textinput,parent,true);
         mObject = object;
+        childView = getTextInputView();
+    }
+    public View getTextInputView() {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_common_textinput,null,true);
         mEditText = (EditText)view.findViewById(R.id.et_answer);
         return view;
     }
