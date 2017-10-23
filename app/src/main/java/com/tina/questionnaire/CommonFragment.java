@@ -44,13 +44,13 @@ public class CommonFragment extends Fragment {
          * generate different type of viewCreators according to question type
          */
         if (mObject.type.equals(QuestionsObject.Type.SINGLE_CHOICE)) {
-            mQuestionViewCreator = new SingleChoiceViewCreator();
+            mQuestionViewCreator = new SingleChoiceViewCreator(mActivity, mObject);
         } else if (mObject.type.equals(QuestionsObject.Type.MULTI_CHOICE)) {
-            mQuestionViewCreator = new MultiChoiceViewCreator();
+            mQuestionViewCreator = new MultiChoiceViewCreator(mActivity, mObject);
         } else if (mObject.type.equals(QuestionsObject.Type.TEXT_INPUT)) {
-            mQuestionViewCreator = new TextInputViewCreator();
+            mQuestionViewCreator = new TextInputViewCreator(mActivity, mObject);
         } else if(mObject.type.equals(QuestionsObject.Type.DATE_PICKER)){
-            mQuestionViewCreator = new DatePickViewCreator();
+            mQuestionViewCreator = new DatePickViewCreator(mActivity, mObject);
         }
     }
 
@@ -65,7 +65,7 @@ public class CommonFragment extends Fragment {
         /**
          * obtain view created in the QuestionViewCreator and add to the current ViewGroup
          */
-        mContent.addView(mQuestionViewCreator.getView(mActivity, mObject));
+        mContent.addView(mQuestionViewCreator.getView());
         /**
          * add prev question button and next question button
          */

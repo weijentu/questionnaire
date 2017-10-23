@@ -24,14 +24,17 @@ public class DatePickViewCreator implements QuestionViewCreator {
     private DatePicker mDatePicker;
     private Context mContext;
 
+    public DatePickViewCreator(Context context, QuestionsObject object){
+        mContext = context;
+        mObject = object;
+    }
+
 
     @Override
-    public View getView(Context context, QuestionsObject object) {
-        mContext = context;
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment_datepick,null,false);
+    public View getView() {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_datepick,null,false);
         mTextView = (TextView)view.findViewById(R.id.tv_question_title);
         mDatePicker = (DatePicker)view.findViewById(R.id.datePicker);
-        mObject = object;
         initData();
         return view;
     }

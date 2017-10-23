@@ -5,6 +5,7 @@ import android.support.annotation.IdRes;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,34 +27,33 @@ public class SingleChoiceViewCreator extends CommonTextInputViewCreator implemen
     private TextView mTvTtitle;
     private LinearLayout mLinearLayout;
     private RadioGroup mRadioGroup;
-    private QuestionsObject mQuestionsObject;
-    private Context mContext;
     private List<RadioButton> mList;
 
+    public SingleChoiceViewCreator(Context context, QuestionsObject object) {
+        super(context, object);
+    }
+
     @Override
-    public View getView(Context context, QuestionsObject object) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+    public View getView() {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.fragment_questionnaire_new, null, false);
         mTvTtitle = (TextView) view.findViewById(R.id.tv_question_title);
         mRadioGroup = (RadioGroup) view.findViewById(R.id.rg);
         mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_textinput);
-        getTextInputView(context,mLinearLayout,object);
-        mQuestionsObject = object;
-        mContext = context;
+        mLinearLayout.addView(childView);
         initData();
-
         return view;
     }
 
 
     public void initData() {
-        mTvTtitle.setText(mQuestionsObject.title);
+        mTvTtitle.setText(mObject.title);
         mList = new ArrayList<>();
         /**
          * Dynamically generate radio buttons according to the number of options
          */
-        for (int i = 0; i < mQuestionsObject.options.size(); i++) {
-            String item = mQuestionsObject.options.get(i);
+        for (int i = 0; i < mObject.options.size(); i++) {
+            String item = mObject.options.get(i);
             RadioButton radioButton = new RadioButton(mContext);
             radioButton.setId(i);
             radioButton.setText(item);
@@ -67,7 +67,7 @@ public class SingleChoiceViewCreator extends CommonTextInputViewCreator implemen
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (mQuestionsObject.hasText && mList.get(mQuestionsObject.textIndex).isChecked()){
+                if (mObject.hasText && mList.get(mObject.textIndex).isChecked()){
                     mLinearLayout.setVisibility(View.VISIBLE);
                 }else {
                     mLinearLayout.setVisibility(View.GONE);
@@ -75,6 +75,7 @@ public class SingleChoiceViewCreator extends CommonTextInputViewCreator implemen
             }
         });
     }
+
 
     @Override
     public boolean check() {
@@ -84,8 +85,8 @@ public class SingleChoiceViewCreator extends CommonTextInputViewCreator implemen
             Toast.makeText(mContext, "Please select one option", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(!mQuestionsObject.hasText || selectedId != mQuestionsObject.textIndex){
-            mQuestionsObject.answer = mQuestionsObject.options.get(selectedId);
+        if(!mObject.hasText || selectedId != mObject.textIndex){
+            mObject.answer = mObject.options.get(selectedId);
             return true;
         }
         return super.check();

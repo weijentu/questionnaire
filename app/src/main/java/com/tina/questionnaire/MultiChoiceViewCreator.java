@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,36 +23,34 @@ import java.util.List;
 
 public class MultiChoiceViewCreator extends CommonTextInputViewCreator implements QuestionViewCreator {
 
-    private QuestionsObject mQuestionsObject;
-
     private TextView mTvTtitle;
-    private Context mContext;
     private LinearLayout mLlCheckBox;
-
     private List<CheckBox> mCheckBoxList;
     private LinearLayout mLlText;
 
+    public MultiChoiceViewCreator(Context context, QuestionsObject object) {
+        super(context, object);
+    }
+
 
     @Override
-    public View getView(Context context, QuestionsObject object) {
-        mContext = context;
-        mQuestionsObject = object;
-        View view = LayoutInflater.from(context).inflate(R.layout.multichoice_layout,null, false);
+    public View getView() {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.multichoice_layout,null, false);
         mTvTtitle = (TextView)view.findViewById(R.id.tv_question_title);
         mLlCheckBox = (LinearLayout) view.findViewById(R.id.ll_checkboxes);
         mLlText = (LinearLayout)view.findViewById(R.id.ll_textinput);
-        getTextInputView(context,mLlText,object);
+        mLlText.addView(childView);
         initData();
         return view;
     }
     private void initData(){
-        mTvTtitle.setText(mQuestionsObject.title);
+        mTvTtitle.setText(mObject.title);
         mCheckBoxList = new ArrayList<>();
         /**
          * dynamically generate checkbox according to the number of options
          */
-        for (int i = 0; i < mQuestionsObject.options.size(); i++){
-            String item = mQuestionsObject.options.get(i);
+        for (int i = 0; i < mObject.options.size(); i++){
+            String item = mObject.options.get(i);
             CheckBox cb = new CheckBox(mContext);
             cb.setText(item);
             cb.setChecked(false);
@@ -64,21 +61,22 @@ public class MultiChoiceViewCreator extends CommonTextInputViewCreator implement
         /**
          * if input text is needed, listen to the selected options to dynamically generate EditText
          */
-        if(mQuestionsObject.hasText) {
-            mCheckBoxList.get(mQuestionsObject.textIndex).setOnCheckedChangeListener(mOnCheckedChangeListener);
+        if(mObject.hasText) {
+            mCheckBoxList.get(mObject.textIndex).setOnCheckedChangeListener(mOnCheckedChangeListener);
         }
 
     }
     private CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if(mQuestionsObject.hasText && isChecked){
+            if(mObject.hasText && isChecked){
                 mLlText.setVisibility(View.VISIBLE);
             }else {
                 mLlText.setVisibility(View.GONE);
             }
         }
     };
+
 
     @Override
     public boolean check() {
@@ -92,18 +90,18 @@ public class MultiChoiceViewCreator extends CommonTextInputViewCreator implement
             Toast.makeText(mContext,"Please select at least one option", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(mQuestionsObject.hasText && mCheckBoxList.get(mQuestionsObject.textIndex).isChecked()){
+        if(mObject.hasText && mCheckBoxList.get(mObject.textIndex).isChecked()){
             boolean value = super.check();
             if(!value){
                 return false;
             }
-            sb.append(mQuestionsObject.answer);
+            sb.append(mObject.answer);
         }
 
         /**
          * save input answer
          */
-        mQuestionsObject.answer = sb.toString();
+        mObject.answer = sb.toString();
         return true;
     }
 }

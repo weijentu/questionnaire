@@ -12,6 +12,6 @@ import com.tina.questionnaire.entity.QuestionsObject;
  */
 
 public interface QuestionViewCreator {
-    View getView(Context context, QuestionsObject object);
+    View getView();
     boolean check();
 }

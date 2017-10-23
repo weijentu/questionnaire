@@ -3,19 +3,18 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/XL"
-        android:layout_marginLeft="@dimen/XL"
-        android:layout_marginRight="@dimen/XL"
-        android:layout_marginTop="@dimen/L"
-        android:background="@drawable/shape_edit_text"
         android:orientation="vertical">
 
 
         <EditText
+            android:layout_marginBottom="@dimen/XL"
+            android:layout_marginLeft="@dimen/XL"
+            android:layout_marginRight="@dimen/XL"
+            android:layout_marginTop="@dimen/L"
             android:id="@+id/et_answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@drawable/shape_edit_text"
             android:gravity="top|left"
             android:hint="Enter your answer here"
             android:lines="5"

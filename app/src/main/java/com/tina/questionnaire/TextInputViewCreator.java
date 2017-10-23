@@ -20,18 +20,20 @@ import com.tina.questionnaire.entity.QuestionsObject;
 
 public class TextInputViewCreator extends CommonTextInputViewCreator implements QuestionViewCreator {
 
-    private QuestionsObject mObject;
     private TextView mTvTtitle;
     private ViewGroup mLinearLayout;
 
+    public TextInputViewCreator(Context context, QuestionsObject object) {
+        super(context, object);
+    }
+
 
     @Override
-    public View getView(Context context, QuestionsObject object) {
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment_textinput, null, false);
-        mObject = object;
+    public View getView() {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_textinput, null, false);
         mTvTtitle = (TextView)view.findViewById(R.id.tv_question_title);
         mLinearLayout = (ViewGroup)view.findViewById(R.id.ll_parent);
-        getTextInputView(context,mLinearLayout,object);
+        mLinearLayout.addView(childView);
         initData();
         return view;
     }
